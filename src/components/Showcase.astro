@@ -1,0 +1,206 @@
+---
+import { projects } from '../data/projects.js';
+import { certs } from '../data/certs.js';
+
+function initials(name) {
+  return name.split(' ').map((w) => w[0]).slice(0, 2).join('');
+}
+---
+<section class="showcase" id="projects">
+  <div class="showcase-wrap">
+    <div class="showcase-head">
+      <div class="about-eyebrow">portofolio</div>
+      <h2>Proyek, sertifikasi, dan <span class="accent">tech stack</span>.</h2>
+
+      <div class="tabs" id="tabs">
+        <div class="tab-indicator" id="tabIndicator"></div>
+        <button class="tab-btn active" data-tab="proyek">Proyek <span class="count">{projects.length}</span></button>
+        <button class="tab-btn" data-tab="sertifikasi">Sertifikasi <span class="count">{certs.length}</span></button>
+        <button class="tab-btn" data-tab="stack">Tech Stack <span class="count">13</span></button>
+      </div>
+    </div>
+
+    <div class="panel-set">
+
+      <!-- PROYEK -->
+      <div class="tab-panel active" data-panel="proyek">
+        <div class="project-grid" id="projectGrid">
+  {projects.map((p, i) => (
+    <div class={`project-card ${i >= 4 ? 'extra' : ''}`} data-index={i}>
+      <img class="thumb" src={p.img} alt={p.name} onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+      <div class="thumb-fallback" style="display:none;">{initials(p.name)}</div>
+      <span class="project-tier">{p.tier}</span>
+      <div class="pname">{p.name}</div>
+      <div class="peye">🔍︎ View details</div>
+    </div>
+  ))}
+</div>
+
+{projects.length > 4 && (
+  <button class="project-more" id="projectMoreBtn">
+    View More ({projects.length - 4})
+  </button>
+)}
+      </div>
+
+      <!-- SERTIFIKASI -->
+      <div class="tab-panel" data-panel="sertifikasi">
+        <div class="cert-list" id="certList">
+          {certs.map((c, i) => (
+            <div class="cert-card" data-index={i}>
+              <img
+                class="thumb"
+                src={c.img}
+                alt={c.name}
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              />
+              <div class="thumb-fallback" style="display:none;">{c.initials}</div>
+              <div class="cert-info"><h3>{c.name}</h3><p>{c.issuer}</p></div>
+              <div class="peye">🔍︎ View certification</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+            <!-- TECH STACK -->
+      <div class="tab-panel" data-panel="stack">
+        <div class="stack-groups">
+  <div class="stack-chips">
+    <div class="stack-card" title="NestJS">
+      <span class="stack-icon"><img src="https://cdn.simpleicons.org/nestjs" alt="NestJS" /></span>
+      <span class="stack-label">NestJS</span>
+    </div>
+
+    <div class="stack-card" title="TypeScript">
+      <span class="stack-icon"><img src="https://cdn.simpleicons.org/typescript" alt="TypeScript" /></span>
+      <span class="stack-label">TypeScript</span>
+    </div>
+
+    <div class="stack-card" title="Node.js">
+      <span class="stack-icon"><img src="https://cdn.simpleicons.org/nodedotjs" alt="Node.js" /></span>
+      <span class="stack-label">Node.js</span>
+    </div>
+
+    <div class="stack-card" title="Express.js">
+      <span class="stack-icon"><img src="https://cdn.simpleicons.org/express/ffffff" alt="Express.js" /></span>
+      <span class="stack-label">Express.js</span>
+    </div>
+
+    <div class="stack-card" title="PostgreSQL">
+      <span class="stack-icon"><img src="https://cdn.simpleicons.org/postgresql" alt="PostgreSQL" /></span>
+      <span class="stack-label">PostgreSQL</span>
+    </div>
+
+    <div class="stack-card" title="Prisma ORM">
+      <span class="stack-icon"><img src="https://cdn.simpleicons.org/prisma/ffffff" alt="Prisma ORM" /></span>
+      <span class="stack-label">Prisma</span>
+    </div>
+    
+    <div class="stack-card" title="MySQL">
+      <span class="stack-icon"><img src="https://cdn.simpleicons.org/mysql" alt="MySQL" /></span>
+      <span class="stack-label">MySQL</span>
+    </div>
+
+    <div class="stack-card" title="Swagger / OpenAPI">
+      <span class="stack-icon"><img src="https://cdn.simpleicons.org/swagger" alt="Swagger" /></span>
+      <span class="stack-label">Swagger</span>
+    </div>
+
+    <div class="stack-card" title="Bcrypt">
+      <span class="stack-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+      </span>
+      <span class="stack-label">Bcrypt</span>
+    </div>
+
+    <div class="stack-card" title="Docker">
+      <span class="stack-icon"><img src="https://cdn.simpleicons.org/docker" alt="Docker" /></span>
+      <span class="stack-label">Docker</span>
+    </div>
+
+    <div class="stack-card" title="Postman">
+      <span class="stack-icon"><img src="https://cdn.simpleicons.org/postman" alt="Postman" /></span>
+      <span class="stack-label">Postman</span>
+    </div>
+
+    <div class="stack-card" title="Git">
+      <span class="stack-icon"><img src="https://cdn.simpleicons.org/git" alt="Git" /></span>
+      <span class="stack-label">Git</span>
+    </div>
+
+    <div class="stack-card" title="Railway">
+      <span class="stack-icon"><img src="https://cdn.simpleicons.org/railway/ffffff" alt="Railway" /></span>
+      <span class="stack-label">Railway</span>
+    </div>
+
+    <div class="stack-card" title="Vercel">
+      <span class="stack-icon"><img src="https://cdn.simpleicons.org/vercel/ffffff" alt="Vercel" /></span>
+      <span class="stack-label">Vercel</span>
+    </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  import { projects } from '../data/projects.js';
+  import { certs } from '../data/certs.js';
+
+  // ---------- Tabs ----------
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.tab-panel');
+  const indicator = document.getElementById('tabIndicator');
+
+  function moveIndicator(btn) {
+    if (!indicator || window.innerWidth <= 640) return;
+    indicator.style.width = btn.offsetWidth + 'px';
+    indicator.style.transform = `translateX(${btn.offsetLeft - 5}px)`;
+  }
+
+  tabBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach((b) => b.classList.remove('active'));
+      panels.forEach((p) => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelector(`[data-panel="${btn.dataset.tab}"]`)?.classList.add('active');
+      moveIndicator(btn);
+    });
+  });
+
+  window.addEventListener('load', () => {
+    const active = document.querySelector('.tab-btn.active');
+    if (active) moveIndicator(active);
+  });
+  window.addEventListener('resize', () => {
+    const active = document.querySelector('.tab-btn.active');
+    if (active) moveIndicator(active);
+  });
+
+  // ---------- Card clicks -> tell the Modals island what to show ----------
+  document.querySelectorAll('#projectGrid .project-card').forEach((card) => {
+    card.addEventListener('click', () => {
+      const i = Number(card.getAttribute('data-index'));
+      window.dispatchEvent(new CustomEvent('open-project-modal', { detail: projects[i] }));
+    });
+  });
+
+  document.querySelectorAll('#certList .cert-card').forEach((card) => {
+    card.addEventListener('click', () => {
+      const i = Number(card.getAttribute('data-index'));
+      window.dispatchEvent(new CustomEvent('open-cert-modal', { detail: certs[i] }));
+    });
+  });
+
+  const moreBtn = document.getElementById('projectMoreBtn');
+const grid = document.getElementById('projectGrid');
+
+if (moreBtn && grid) {
+  const hiddenCount = grid.querySelectorAll('.project-card.extra').length;
+  moreBtn.addEventListener('click', () => {
+    const expanded = grid.classList.toggle('show-all');
+    moreBtn.textContent = expanded ? 'View Less' : `View More (${hiddenCount})`;
+  });
+}
+</script>

@@ -1,0 +1,33 @@
+<nav class="navwrap">
+  <div class="nav">
+    <a href="#hero" class="brand">amralln_</a>
+    <div class="links" id="navLinks">
+      <a href="#hero" data-id="hero" class="active">Home</a>
+      <a href="#about" data-id="about">About</a>
+      <a href="#projects" data-id="projects">Portfolio</a>
+      <a href="#contact" data-id="contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const links = document.querySelectorAll('#navLinks a');
+  const sections = Array.from(links)
+    .map((a) => document.getElementById(a.getAttribute('data-id')))
+    .filter(Boolean);
+
+  function setActive(id) {
+    links.forEach((a) => a.classList.toggle('active', a.getAttribute('data-id') === id));
+  }
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    },
+    { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
+  );
+
+  sections.forEach((s) => io.observe(s));
+</script>

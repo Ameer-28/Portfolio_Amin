@@ -1,0 +1,107 @@
+<!-- MODAL: Project detail / case study -->
+<div class="modal-overlay" id="projectModal">
+  <div class="modal-box">
+    <div class="modal-media" id="projModalMedia">
+      <button class="modal-close" data-close>&times;</button>
+    </div>
+    <div class="modal-body" id="projModalBody"></div>
+  </div>
+</div>
+
+<!-- MODAL: Certificate photo -->
+<div class="modal-overlay" id="certModal">
+  <div class="modal-box" style="max-width:560px;">
+    <div class="modal-media" id="certModalMedia">
+      <button class="modal-close" data-close>&times;</button>
+    </div>
+    <div class="modal-body" id="certModalBody"></div>
+  </div>
+</div>
+
+<script>
+  const ghIcon = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-3.16 19.49c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.6 9.6 0 015 0c1.9-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0012 2z"/></svg>`;
+
+  const projectModal = document.getElementById('projectModal');
+  const projModalMedia = document.getElementById('projModalMedia');
+  const projModalBody = document.getElementById('projModalBody');
+
+  const certModal = document.getElementById('certModal');
+  const certModalMedia = document.getElementById('certModalMedia');
+  const certModalBody = document.getElementById('certModalBody');
+
+  function initials(name) {
+    return name.split(' ').map((w) => w[0]).slice(0, 2).join('');
+  }
+
+  window.addEventListener('open-project-modal', (e) => {
+    const p = e.detail;
+    if (!projModalMedia || !projModalBody || !projectModal) return;
+
+    projModalMedia.innerHTML = `
+      <button class="modal-close" data-close>&times;</button>
+      <img src="${p.img}" alt="${p.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="thumb-fallback" style="display:none;">${initials(p.name)}</div>
+    `;
+
+    let caseHtml = '';
+    if (p.caseStudy) {
+      caseHtml = `
+        <div class="modal-case">
+          <h4>case study</h4>
+          <div class="case-block"><b>Alur arsitektur</b><p>${p.caseStudy.layers}</p></div>
+          <div class="case-block"><b>Entitas basis data / fokus</b><p>${p.caseStudy.entities}</p></div>
+          <div class="case-block"><b>Keputusan teknis</b><p>${p.caseStudy.decision}</p></div>
+        </div>`;
+    }
+
+    projModalBody.innerHTML = `
+      <span class="modal-tier">${p.tier}</span>
+      <h3>${p.name}</h3>
+      <p class="modal-desc">${p.desc}</p>
+      <div class="modal-tags">${p.tags.map((t) => `<span>${t}</span>`).join('')}</div>
+      ${caseHtml}
+      <a class="modal-link" href="${p.github}" target="_blank" rel="noopener">${ghIcon} ${p.githubFrontend ? 'Backend' : 'Lihat di GitHub'}</a>
+      ${p.githubFrontend ? `<a class="modal-link" style="margin-left:10px;" href="${p.githubFrontend}" target="_blank" rel="noopener">${ghIcon} Frontend</a>` : ''}
+      ${p.live ? `<a class="modal-link" style="margin-left:10px; background:transparent; border:1px solid var(--line); color:var(--text);" href="${p.live}" target="_blank" rel="noopener">Live Demo →</a>` : ''}
+    `;
+
+    projectModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  });
+
+  window.addEventListener('open-cert-modal', (e) => {
+    const c = e.detail;
+    if (!certModalMedia || !certModalBody || !certModal) return;
+
+    certModalMedia.innerHTML = `
+      <button class="modal-close" data-close>&times;</button>
+      <img src="${c.img}" alt="${c.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="thumb-fallback" style="display:none;">${c.initials}</div>
+    `;
+
+    certModalBody.innerHTML = `
+      <h3>${c.name}</h3>
+      <p class="modal-desc">${c.issuer}</p>
+    `;
+
+    certModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  });
+
+  function closeModals() {
+    projectModal?.classList.remove('show');
+    certModal?.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('click', (e) => {
+    const target = e.target;
+    if (target instanceof Element && (target.matches('[data-close]') || target.classList.contains('modal-overlay'))) {
+      closeModals();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModals();
+  });
+</script>
