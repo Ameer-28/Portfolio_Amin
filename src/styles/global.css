@@ -827,14 +827,15 @@ h1 .accent{ color:var(--amber); font-style:normal; }
   .social-grid{ grid-template-columns:repeat(3,1fr); }
 }
 @media (max-width:480px){
-  .social-grid{ grid-template-columns:1fr; }
-  .email-card{ align-items:flex-start; }
-  .email-text{ min-width:0; }
-  .email-text .value{
-    white-space:normal;
-    overflow:visible;
-    text-overflow:clip;
-    overflow-wrap:anywhere;
-  }
-  .email-arrow{ margin-top:2px; }
+  .email-card{ padding:16px; gap:12px; }
+  .email-icon{ width:36px; height:36px; }
+  .email-icon svg{ width:16px; height:16px; }
+  .email-text .label{ font-size:10.5px; }
+  .email-text .value{ font-size:12.5px; }
+  .email-arrow{ display:none; }
+
+  .social-grid{ gap:10px; }
+  .social-tile{ padding:16px 6px; }
+  .social-tile svg{ width:18px; height:18px; }
+  .social-tile span{ font-size:11px; }
 }
