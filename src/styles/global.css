@@ -828,4 +828,13 @@ h1 .accent{ color:var(--amber); font-style:normal; }
 }
 @media (max-width:480px){
   .social-grid{ grid-template-columns:1fr; }
+  .email-card{ align-items:flex-start; }
+  .email-text{ min-width:0; }
+  .email-text .value{
+    white-space:normal;
+    overflow:visible;
+    text-overflow:clip;
+    overflow-wrap:anywhere;
+  }
+  .email-arrow{ margin-top:2px; }
 }
