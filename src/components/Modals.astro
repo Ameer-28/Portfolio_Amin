@@ -69,7 +69,7 @@
     document.body.style.overflow = 'hidden';
   });
 
-  window.addEventListener('open-cert-modal', (e) => {
+    window.addEventListener('open-cert-modal', (e) => {
     const c = e.detail;
     if (!certModalMedia || !certModalBody || !certModal) return;
 
@@ -79,10 +79,7 @@
       <div class="thumb-fallback" style="display:none;">${c.initials}</div>
     `;
 
-    certModalBody.innerHTML = `
-      <h3>${c.name}</h3>
-      <p class="modal-desc">${c.issuer}</p>
-    `;
+    certModalBody.innerHTML = '';
 
     certModal.classList.add('show');
     document.body.style.overflow = 'hidden';
