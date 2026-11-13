@@ -1,14 +1,14 @@
-<nav class="navwrap">
+<header class="navwrap" id="mainNav">
   <div class="nav">
-    <a href="#hero" class="brand">amralln_</a>
-    <div class="links" id="navLinks">
+    <a href="#hero" class="brand">mhmmdamn.</a>
+    <nav class="links" id="navLinks">
       <a href="#hero" data-id="hero" class="active">Home</a>
       <a href="#about" data-id="about">About</a>
       <a href="#projects" data-id="projects">Portfolio</a>
       <a href="#contact" data-id="contact">Contact</a>
-    </div>
+    </nav>
   </div>
-</nav>
+</header>
 
 <script>
   const links = document.querySelectorAll('#navLinks a');
@@ -30,4 +30,14 @@
   );
 
   sections.forEach((s) => io.observe(s));
+
+  // Navbar background blur when scrolled past hero
+  const navwrap = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      navwrap?.classList.add('scrolled');
+    } else {
+      navwrap?.classList.remove('scrolled');
+    }
+  }, { passive: true });
 </script>

@@ -1,65 +1,29 @@
 ---
-import HeroTitle from './react/HeroTitle.jsx';
 ---
-<section class="hero" id="hero">
-  <div class="hero-grid">
-    <div>
-      <div class="kicker">
-        <span class="dot"></span>
-        Open to internships &amp; collaborations
-      </div>
+<section class="hero-showcase" id="hero">
+  <div class="hero-canvas">
 
-      <HeroTitle client:load />
-
-      <p class="sub">Hi, I'm <b>Muhammad Amin Murtadho</b>. A Software Engineering (RPL) student who enjoys turning ideas into clean, well-structured, and dependable backend systems.</p>
-
-      <div class="actions">
-        <a href="#projects" class="btn-primary">View Projects ➝</a>
-        <a href="/CV%20Muhammad%20AMin%20Murtadho.pdf" download="CV-Muhammad-Amin-Murtadho.pdf" class="btn-ghost">Download CV</a>
-      </div>
+    <!-- LAYER 1: Solid white text BEHIND person -->
+    <div class="hero-text-layer text-behind" aria-hidden="true">
+      <div class="hero-word word-software">Software</div>
+      <div class="hero-word word-engineer">Engineer</div>
     </div>
 
-    <div class="photo-stage">
-      <div class="photo-card" id="photoCard">
-        <div class="photo-frame">
-          <img src="/images/profil.jpeg" alt="Muhammad Amin Murtadho"  />
-        </div>
-        <div class="photo-glow" id="photoGlow"></div>
-
-        <div class="float-chip chip-1">⌘ TypeScript</div>
-        <div class="float-chip chip-2">{ } Nest.js</div>
-
-        <div class="photo-tag">
-          <div>
-            <div class="name">Amin Murtadho</div>
-            <div class="role">Backend Developer</div>
-          </div>
-          <div class="status-chip"><span></span>Open</div>
-        </div>
-      </div>
+    <!-- LAYER 2: Cutout photo in the MIDDLE -->
+    <div class="hero-portrait-wrap">
+      <img
+        src="/images/hero-person.png"
+        alt="Muhammad Amin Murtadho"
+        class="hero-portrait-img"
+        loading="eager"
+      />
     </div>
+
+    <!-- LAYER 3: Outlined text IN FRONT of person -->
+    <h1 class="hero-text-layer text-front">
+      <div class="hero-word word-software">Software</div>
+      <div class="hero-word word-engineer">Engineer</div>
+    </h1>
+
   </div>
 </section>
-
-<script>
-  const card = document.getElementById('photoCard');
-  const glow = document.getElementById('photoGlow');
-  const maxTilt = 10;
-
-  if (card && glow) {
-    card.addEventListener('mousemove', (e) => {
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width;
-      const y = (e.clientY - r.top) / r.height;
-      const rotY = (x - 0.5) * maxTilt * 2;
-      const rotX = (0.5 - y) * maxTilt * 2;
-      card.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-      glow.style.setProperty('--mx', `${x * 100}%`);
-      glow.style.setProperty('--my', `${y * 100}%`);
-    });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'rotateX(0deg) rotateY(0deg)';
-    });
-  }
-</script>
