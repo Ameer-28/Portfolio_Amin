@@ -202,6 +202,87 @@ a{color:inherit; text-decoration:none;}
   -webkit-text-stroke:1.2px #ffffff;
 }
 
+/* ---------- Hero Reveal Entrance Animations ---------- */
+@keyframes heroPortraitReveal{
+  0%{
+    opacity:0;
+    transform:translateY(28px) scale(0.96);
+    filter:contrast(1.04) brightness(0.6) blur(10px);
+  }
+  100%{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    filter:contrast(1.04) brightness(1.02) blur(0);
+  }
+}
+
+@keyframes heroSoftwareReveal{
+  0%{
+    opacity:0;
+    transform:translateY(calc(-50% + 46px));
+    filter:blur(12px);
+  }
+  100%{
+    opacity:1;
+    transform:translateY(-50%);
+    filter:blur(0);
+  }
+}
+
+@keyframes heroEngineerReveal{
+  0%{
+    opacity:0;
+    transform:translateY(calc(-50% + 46px));
+    filter:blur(12px);
+  }
+  100%{
+    opacity:1;
+    transform:translateY(-50%);
+    filter:blur(0);
+  }
+}
+
+@keyframes heroSoftwareRevealMobile{
+  0%{
+    opacity:0;
+    transform:translateX(-50%) translateY(32px);
+    filter:blur(10px);
+  }
+  100%{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+    filter:blur(0);
+  }
+}
+
+@keyframes heroEngineerRevealMobile{
+  0%{
+    opacity:0;
+    transform:translateX(-50%) translateY(32px);
+    filter:blur(10px);
+  }
+  100%{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+    filter:blur(0);
+  }
+}
+
+.hero-showcase.hero-animate .hero-portrait-img{
+  animation:heroPortraitReveal 1.25s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+  will-change:transform, opacity, filter;
+}
+
+.hero-showcase.hero-animate .word-software{
+  animation:heroSoftwareReveal 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both;
+  will-change:transform, opacity, filter;
+}
+
+.hero-showcase.hero-animate .word-engineer{
+  animation:heroEngineerReveal 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.44s both;
+  will-change:transform, opacity, filter;
+}
+
 /* Responsive adjustment for tablets & mobile */
 @media (max-width:860px){
   .hero-text-layer{
@@ -220,10 +301,26 @@ a{color:inherit; text-decoration:none;}
     top:56%;
     text-align:center;
   }
+  .hero-showcase.hero-animate .word-software{
+    animation-name:heroSoftwareRevealMobile;
+  }
+  .hero-showcase.hero-animate .word-engineer{
+    animation-name:heroEngineerRevealMobile;
+  }
   .hero-portrait-wrap{
     height:62vh;
     max-height:500px;
     bottom:2vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .hero-showcase.hero-animate .hero-portrait-img,
+  .hero-showcase.hero-animate .word-software,
+  .hero-showcase.hero-animate .word-engineer{
+    animation:none !important;
+    opacity:1 !important;
+    filter:none !important;
   }
 }
 

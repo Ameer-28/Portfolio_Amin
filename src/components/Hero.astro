@@ -1,6 +1,6 @@
 ---
 ---
-<section class="hero-showcase" id="hero">
+<section class="hero-showcase hero-animate" id="hero">
   <div class="hero-canvas">
 
     <!-- LAYER 1: Solid white text BEHIND person -->
@@ -27,3 +27,19 @@
 
   </div>
 </section>
+
+<script>
+  // Re-trigger hero reveal animation when clicking Home
+  const homeLinks = document.querySelectorAll('a[href="#hero"]');
+  const hero = document.getElementById('hero');
+
+  if (homeLinks.length && hero) {
+    homeLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        hero.classList.remove('hero-animate');
+        void hero.offsetWidth;
+        hero.classList.add('hero-animate');
+      });
+    });
+  }
+</script>
