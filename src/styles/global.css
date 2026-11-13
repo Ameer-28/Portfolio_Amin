@@ -10,6 +10,7 @@
   --sans:'Inter', sans-serif;
   --display:'Space Grotesk', sans-serif;
   --poppins:'Poppins', sans-serif;
+  --spartan:'League Spartan', sans-serif;
 }
 *{box-sizing:border-box; margin:0; padding:0;}
 
@@ -57,8 +58,8 @@ a{color:inherit; text-decoration:none;}
   padding:0;
 }
 .nav .brand{
-  font-family:var(--poppins);
-  font-size:16px;
+  font-family:var(--spartan);
+  font-size:17px;
   font-weight:700;
   color:#ffffff;
   letter-spacing:-0.02em;
@@ -71,9 +72,9 @@ a{color:inherit; text-decoration:none;}
   gap:36px;
 }
 .nav .links a{
-  font-family:var(--poppins);
-  font-size:14px;
-  font-weight:400;
+  font-family:var(--spartan);
+  font-size:15px;
+  font-weight:500;
   color:rgba(255,255,255,0.88);
   position:relative;
   text-decoration:none;
@@ -93,12 +94,12 @@ a{color:inherit; text-decoration:none;}
 @media (max-width:640px){
   .navwrap{ padding:24px 24px 16px; }
   .nav .links{ gap:18px; }
-  .nav .links a{ font-size:12.5px; }
+  .nav .links a{ font-size:13px; }
 }
 @media (max-width:440px){
-  .nav .brand{ font-size:14.5px; }
+  .nav .brand{ font-size:15px; }
   .nav .links{ gap:14px; }
-  .nav .links a{ font-size:11.5px; }
+  .nav .links a{ font-size:12px; }
 }
 
 /* ---------- Hero Section (Cinematic Subject + Layered Overlap Title) ---------- */
@@ -155,10 +156,10 @@ a{color:inherit; text-decoration:none;}
   width:100%;
   height:100%;
   pointer-events:none;
-  font-family:var(--poppins);
-  font-size:clamp(3.8rem, 8.2vw, 8rem);
-  font-weight:700;
-  letter-spacing:-0.03em;
+  font-family:var(--spartan);
+  font-size:clamp(3.8rem, 8.8vw, 8.5rem);
+  font-weight:800;
+  letter-spacing:-0.02em;
   line-height:1;
   margin:0;
   padding:0;
@@ -170,22 +171,22 @@ a{color:inherit; text-decoration:none;}
   user-select:none;
 }
 
-/* Software on the left: starts at 8vw from left and enters deep into the subject */
+/* Software on the left: right edge is anchored past the center line into the subject */
 .word-software{
   position:absolute;
-  left:8vw;
+  right:calc(50% + 4.5vw);
   top:38%;
   transform:translateY(-50%);
-  text-align:left;
+  text-align:right;
 }
 
-/* Engineer on the right: starts deep inside the subject and ends at 8vw from right */
+/* Engineer on the right: left edge starts directly on the subject's chest */
 .word-engineer{
   position:absolute;
-  right:8vw;
-  top:52%;
+  left:calc(50% + 3.5vw);
+  top:50%;
   transform:translateY(-50%);
-  text-align:right;
+  text-align:left;
 }
 
 /* LAYER 1: Solid white text behind the subject */
@@ -204,24 +205,24 @@ a{color:inherit; text-decoration:none;}
 /* Responsive adjustment for tablets & mobile */
 @media (max-width:860px){
   .hero-text-layer{
-    font-size:clamp(2.6rem, 11vw, 4.4rem);
+    font-size:clamp(3rem, 13vw, 5rem);
   }
   .word-software{
-    left:50%;
-    transform:translateX(-50%);
-    top:28%;
-    text-align:center;
-  }
-  .word-engineer{
     right:auto;
     left:50%;
     transform:translateX(-50%);
-    top:58%;
+    top:26%;
+    text-align:center;
+  }
+  .word-engineer{
+    left:50%;
+    transform:translateX(-50%);
+    top:56%;
     text-align:center;
   }
   .hero-portrait-wrap{
-    height:60vh;
-    max-height:480px;
+    height:62vh;
+    max-height:500px;
     bottom:2vh;
   }
 }
