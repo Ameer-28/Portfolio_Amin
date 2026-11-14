@@ -1,0 +1,788 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import { projects } from '../../data/projects.js';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+
+function getTechIcon(tag) {
+  const map = {
+    'React 19': 'https://cdn.simpleicons.org/react',
+    'React': 'https://cdn.simpleicons.org/react',
+    'Next.js': 'https://cdn.simpleicons.org/nextdotjs/ffffff',
+    'TypeScript': 'https://cdn.simpleicons.org/typescript',
+    'Node.js': 'https://cdn.simpleicons.org/nodedotjs',
+    'Express': 'https://cdn.simpleicons.org/express/ffffff',
+    'Express.js': 'https://cdn.simpleicons.org/express/ffffff',
+    'NestJS': 'https://cdn.simpleicons.org/nestjs',
+    'PostgreSQL': 'https://cdn.simpleicons.org/postgresql',
+    'MySQL': 'https://cdn.simpleicons.org/mysql',
+    'Neon': 'https://cdn.simpleicons.org/neon',
+    'Prisma ORM': 'https://cdn.simpleicons.org/prisma/ffffff',
+    'Prisma': 'https://cdn.simpleicons.org/prisma/ffffff',
+    'Tailwind CSS': 'https://cdn.simpleicons.org/tailwindcss',
+    'TanStack Query': 'https://cdn.simpleicons.org/reactquery',
+    'Zod': 'https://cdn.simpleicons.org/zod',
+    'Swagger': 'https://cdn.simpleicons.org/swagger',
+    'Jest': 'https://cdn.simpleicons.org/jest',
+    'Vercel': 'https://cdn.simpleicons.org/vercel/ffffff',
+    'Railway': 'https://cdn.simpleicons.org/railway/ffffff',
+    'Docker': 'https://cdn.simpleicons.org/docker',
+    'Passport JWT': 'https://cdn.simpleicons.org/jsonwebtokens/ffffff',
+    'REST API': 'https://cdn.simpleicons.org/postman'
+  };
+  return map[tag] || null;
+}
+---
+
+<Layout title={`${project.name} — Muhammad Amin Murtadho`} description={project.desc}>
+  <Nav />
+
+  <main class="project-detail-page">
+    <div class="project-detail-container">
+      
+      <!-- TOP NAVIGATION BAR: Back Button & Breadcrumbs (matches reference) -->
+      <div class="detail-nav-bar">
+        <a href="/#projects" class="detail-back-pill" id="detailBackBtn">
+          <svg viewBox="0 0 24 24" class="back-svg" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          <span>Back</span>
+        </a>
+
+        <div class="detail-breadcrumbs">
+          <a href="/#projects" class="crumb-parent">Projects</a>
+          <span class="crumb-separator">&gt;</span>
+          <span class="crumb-current">{project.name}</span>
+        </div>
+      </div>
+
+      <!-- MAIN 2-COLUMN GRID -->
+      <div class="detail-layout-grid">
+        
+        <!-- LEFT COLUMN: Project Information -->
+        <div class="detail-info-column">
+          
+          <div class="detail-tier-badge-wrap">
+            <span class="detail-tier-badge">{project.tier}</span>
+          </div>
+
+          <h1 class="detail-project-title">{project.name}</h1>
+
+          <p class="detail-project-description">{project.desc}</p>
+
+          <!-- TECHNOLOGIES USED SECTION -->
+          <div class="detail-tech-section">
+            <h2 class="detail-tech-heading">
+              <span class="tech-code-icon">&lt;/&gt;</span>
+              <span>Technologies Used</span>
+            </h2>
+
+            <div class="detail-tech-pills">
+              {project.tags.map((t) => {
+                const icon = getTechIcon(t);
+                return (
+                  <div class="detail-tech-pill">
+                    {icon ? (
+                      <img src={icon} alt="" class="tech-icon-img" loading="lazy" />
+                    ) : (
+                      <span class="tech-icon-fallback">#</span>
+                    )}
+                    <span class="tech-label">{t}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <!-- CASE STUDY / ARCHITECTURE SECTION (if present) -->
+          {project.caseStudy && (
+            <div class="detail-case-study">
+              <div class="case-study-eyebrow">// Technical Architecture & Case Study</div>
+              
+              <div class="case-study-card">
+                <div class="case-card-title">Alur Arsitektur</div>
+                <p class="case-card-body">{project.caseStudy.layers}</p>
+              </div>
+
+              <div class="case-study-card">
+                <div class="case-card-title">Entitas Basis Data / Fokus</div>
+                <p class="case-card-body">{project.caseStudy.entities}</p>
+              </div>
+
+              <div class="case-study-card">
+                <div class="case-card-title">Keputusan Teknis</div>
+                <p class="case-card-body">{project.caseStudy.decision}</p>
+              </div>
+            </div>
+          )}
+
+          <!-- ACTION BUTTONS -->
+          <div class="detail-action-buttons">
+            <a href={project.github} target="_blank" rel="noopener" class="detail-btn detail-btn-github">
+              <svg viewBox="0 0 24 24" class="btn-svg" fill="currentColor">
+                <path d="M12 2a10 10 0 00-3.16 19.49c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.6 9.6 0 015 0c1.9-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0012 2z"/>
+              </svg>
+              <span>{project.githubFrontend ? 'Backend Repo' : 'Lihat di GitHub'}</span>
+            </a>
+
+            {project.githubFrontend && (
+              <a href={project.githubFrontend} target="_blank" rel="noopener" class="detail-btn detail-btn-github">
+                <svg viewBox="0 0 24 24" class="btn-svg" fill="currentColor">
+                  <path d="M12 2a10 10 0 00-3.16 19.49c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.6 9.6 0 015 0c1.9-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0012 2z"/>
+                </svg>
+                <span>Frontend Repo</span>
+              </a>
+            )}
+
+            {project.live && (
+              <a href={project.live} target="_blank" rel="noopener" class="detail-btn detail-btn-live">
+                <span>Live Demo</span>
+                <span class="arrow-glyph">&rarr;</span>
+              </a>
+            )}
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: Visual Preview Mockup or Architecture Terminal -->
+        <div class="detail-media-column">
+          
+          {project.hasUi && project.img ? (
+            <div class="mockup-browser-window">
+              <div class="mockup-browser-header">
+                <div class="mockup-dots">
+                  <span class="mock-dot mock-dot-red"></span>
+                  <span class="mock-dot mock-dot-yellow"></span>
+                  <span class="mock-dot mock-dot-green"></span>
+                </div>
+                <div class="mockup-address-bar">
+                  <svg viewBox="0 0 24 24" class="lock-svg" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                  </svg>
+                  <span class="address-text">{project.live ? project.live.replace(/^https?:\/\//, '') : `${project.slug}.local`}</span>
+                </div>
+                <div class="mockup-header-spacer"></div>
+              </div>
+
+              <div class="mockup-screen-wrap">
+                <img src={project.img} alt={project.name} class="mockup-image" />
+              </div>
+            </div>
+          ) : (
+            <div class="backend-terminal-window">
+              <div class="terminal-window-header">
+                <div class="mockup-dots">
+                  <span class="mock-dot mock-dot-red"></span>
+                  <span class="mock-dot mock-dot-yellow"></span>
+                  <span class="mock-dot mock-dot-green"></span>
+                </div>
+                <div class="terminal-tab-title">{project.slug}.service.ts</div>
+                <div class="terminal-status-badge">
+                  <span class="status-pulse-dot"></span>
+                  <span>ONLINE API</span>
+                </div>
+              </div>
+
+              <div class="terminal-window-body">
+                <div class="terminal-code-header">
+                  <span class="code-comment">// System Architecture Specification</span>
+                </div>
+
+                <div class="terminal-code-lines">
+                  <div class="code-line"><span class="code-keyword">import</span> &#123; Injectable, Logger &#125; <span class="code-keyword">from</span> <span class="code-string">'@nestjs/common'</span>;</div>
+                  <div class="code-line"><span class="code-keyword">import</span> &#123; PrismaService &#125; <span class="code-keyword">from</span> <span class="code-string">'./prisma.service'</span>;</div>
+                  <div class="code-line empty"></div>
+                  <div class="code-line"><span class="code-decorator">@Injectable</span>()</div>
+                  <div class="code-line"><span class="code-keyword">export class</span> <span class="code-class">{project.name.replace(/[^a-zA-Z0-9]/g, '')}Service</span> &#123;</div>
+                  <div class="code-line indent"><span class="code-keyword">private readonly</span> logger = <span class="code-keyword">new</span> Logger(<span class="code-string">'{project.name}'</span>);</div>
+                  <div class="code-line empty"></div>
+                  <div class="code-line indent"><span class="code-keyword">constructor</span>(<span class="code-keyword">private readonly</span> prisma: PrismaService) &#123;&#125;</div>
+                  <div class="code-line empty"></div>
+                  <div class="code-line indent"><span class="code-comment">// Production endpoints & business guards</span></div>
+                  <div class="code-line indent"><span class="code-keyword">async</span> executePipeline() &#123;</div>
+                  <div class="code-line indent-2"><span class="code-keyword">return this</span>.prisma.dispatch({JSON.stringify({
+                    tier: project.tier,
+                    status: "production-ready",
+                    security: "JWT + RBAC Guards"
+                  }, null, 2)});</div>
+                  <div class="code-line indent">&#125;</div>
+                  <div class="code-line">&#125;</div>
+                </div>
+
+                <div class="terminal-spec-box">
+                  <div class="spec-row">
+                    <span class="spec-label">Runtime Engine:</span>
+                    <span class="spec-value">Node.js / TypeScript Strict</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">Architecture Tier:</span>
+                    <span class="spec-value">{project.tier} Service</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">Security & Auth:</span>
+                    <span class="spec-value">Dual-Secret JWT / RBAC / DTO Validation</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+</Layout>
+
+<script>
+  // Smart back navigation: returns to previous section or fallback to home projects
+  const backBtn = document.getElementById('detailBackBtn');
+  if (backBtn) {
+    backBtn.addEventListener('click', (e) => {
+      if (document.referrer && document.referrer.includes(window.location.host)) {
+        e.preventDefault();
+        window.history.back();
+      }
+    });
+  }
+</script>
+
+<style>
+  .project-detail-page {
+    background-color: #000000;
+    min-height: 100vh;
+    padding: 130px 6vw 100px;
+    color: var(--text);
+  }
+
+  .project-detail-container {
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+
+  /* Navigation Bar: Back & Breadcrumb */
+  .detail-nav-bar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 42px;
+  }
+
+  .detail-back-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.04);
+    color: #ffffff;
+    font-family: var(--spartan);
+    font-size: 13.5px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
+  }
+
+  .detail-back-pill:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.32);
+    transform: translateX(-3px);
+  }
+
+  .back-svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .detail-breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 13.5px;
+  }
+
+  .crumb-parent {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .crumb-parent:hover {
+    color: #ffffff;
+  }
+
+  .crumb-separator {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 11px;
+  }
+
+  .crumb-current {
+    color: #ffffff;
+    font-weight: 500;
+  }
+
+  /* Main 2-Column Grid */
+  .detail-layout-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  /* Left Column */
+  .detail-info-column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .detail-tier-badge-wrap {
+    margin-bottom: 14px;
+  }
+
+  .detail-tier-badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.5px;
+    color: var(--amber);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--amber-dim);
+    padding: 4px 11px;
+    border-radius: 6px;
+    text-transform: uppercase;
+  }
+
+  .detail-project-title {
+    font-family: var(--spartan);
+    font-size: clamp(2.4rem, 4.8vw, 3.8rem);
+    font-weight: 800;
+    line-height: 1.08;
+    color: #ffffff;
+    letter-spacing: -0.025em;
+    margin-bottom: 22px;
+  }
+
+  .detail-project-description {
+    font-family: var(--sans);
+    font-size: 15.5px;
+    line-height: 1.8;
+    color: var(--muted);
+    margin-bottom: 38px;
+    max-width: 620px;
+  }
+
+  /* Technologies Used Section */
+  .detail-tech-section {
+    margin-bottom: 36px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .detail-tech-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--spartan);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 18px;
+  }
+
+  .tech-code-icon {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--muted);
+    background: rgba(255, 255, 255, 0.06);
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .detail-tech-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .detail-tech-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: #ffffff;
+    transition: all 0.2s ease;
+  }
+
+  .detail-tech-pill:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .tech-icon-img {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+  }
+
+  .tech-icon-fallback {
+    color: var(--muted);
+    font-weight: bold;
+  }
+
+  /* Case Study */
+  .detail-case-study {
+    margin-bottom: 38px;
+    padding: 22px 24px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .case-study-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  .case-study-card {
+    margin-bottom: 16px;
+  }
+
+  .case-study-card:last-child {
+    margin-bottom: 0;
+  }
+
+  .case-card-title {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 4px;
+  }
+
+  .case-card-body {
+    font-family: var(--sans);
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+
+  /* Action Buttons */
+  .detail-action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-top: 8px;
+  }
+
+  .detail-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    border-radius: 9px;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .detail-btn-github {
+    background: #ffffff;
+    color: #000000;
+    border: 1px solid #ffffff;
+  }
+
+  .detail-btn-github:hover {
+    background: #e5e5e5;
+    transform: translateY(-2px);
+  }
+
+  .detail-btn-live {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+  }
+
+  .detail-btn-live:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.45);
+    transform: translateY(-2px);
+  }
+
+  .btn-svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .arrow-glyph {
+    transition: transform 0.2s ease;
+  }
+
+  .detail-btn-live:hover .arrow-glyph {
+    transform: translateX(3px);
+  }
+
+  /* RIGHT COLUMN: Browser Mockup */
+  .detail-media-column {
+    position: sticky;
+    top: 100px;
+  }
+
+  .mockup-browser-window {
+    border-radius: 16px;
+    overflow: hidden;
+    background: #0d0d0d;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.95), 0 0 30px rgba(255, 255, 255, 0.02);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .mockup-browser-window:hover {
+    border-color: rgba(255, 255, 255, 0.24);
+    box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.98), 0 0 40px rgba(255, 255, 255, 0.04);
+  }
+
+  .mockup-browser-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    background: #141414;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .mockup-dots {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .mock-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .mock-dot-red { background: #ff5f56; }
+  .mock-dot-yellow { background: #ffbd2e; }
+  .mock-dot-green { background: #27c93f; }
+
+  .mockup-address-bar {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: #0a0a0a;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 4px 14px;
+    border-radius: 6px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    max-width: 320px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .lock-svg {
+    width: 11px;
+    height: 11px;
+    color: #10b981;
+    flex-shrink: 0;
+  }
+
+  .mockup-header-spacer {
+    width: 44px;
+  }
+
+  .mockup-screen-wrap {
+    width: 100%;
+    background: #000000;
+  }
+
+  .mockup-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  /* Backend Architecture Terminal Window */
+  .backend-terminal-window {
+    border-radius: 16px;
+    overflow: hidden;
+    background: #0a0a0a;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.95);
+  }
+
+  .terminal-window-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    background: #141414;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .terminal-tab-title {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: #ffffff;
+  }
+
+  .terminal-status-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: #10b981;
+    letter-spacing: 0.5px;
+  }
+
+  .status-pulse-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.7);
+  }
+
+  .terminal-window-body {
+    padding: 24px 22px;
+  }
+
+  .terminal-code-header {
+    margin-bottom: 14px;
+  }
+
+  .code-comment {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: #6b7280;
+    font-style: italic;
+  }
+
+  .terminal-code-lines {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.7;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 16px 18px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    overflow-x: auto;
+  }
+
+  .code-line.empty {
+    height: 10px;
+  }
+
+  .code-line.indent {
+    padding-left: 20px;
+  }
+
+  .code-line.indent-2 {
+    padding-left: 40px;
+  }
+
+  .code-keyword { color: #f43f5e; }
+  .code-decorator { color: #f59e0b; }
+  .code-class { color: #38bdf8; }
+  .code-string { color: #10b981; }
+
+  .terminal-spec-box {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 11.5px;
+  }
+
+  .spec-label {
+    color: var(--muted);
+  }
+
+  .spec-value {
+    color: #ffffff;
+    font-weight: 500;
+  }
+
+  /* Responsive Breakpoints */
+  @media (max-width: 980px) {
+    .detail-layout-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .detail-media-column {
+      position: static;
+      order: 2;
+    }
+
+    .detail-info-column {
+      order: 1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .project-detail-page {
+      padding: 100px 5vw 80px;
+    }
+
+    .detail-project-title {
+      font-size: 2.2rem;
+    }
+
+    .detail-nav-bar {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .detail-action-buttons {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .detail-btn {
+      justify-content: center;
+    }
+  }
+</style>

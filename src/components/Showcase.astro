@@ -31,15 +31,15 @@ function initials(name) {
         <div class="project-grid" id="projectGrid">
   {projects.map((p, i) => (
     p.hasUi ? (
-      <div class={`project-card project-card-ui ${i >= 4 ? 'extra' : ''}`} data-index={i}>
+      <a href={`/projects/${p.slug}`} class={`project-card project-card-ui ${i >= 4 ? 'extra' : ''}`} data-index={i}>
         <img class="thumb" src={p.img} alt={p.name} onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
         <div class="thumb-fallback" style="display:none;">{initials(p.name)}</div>
         <span class="project-tier">{p.tier}</span>
         <div class="pname">{p.name}</div>
         <div class="peye">🔍︎ View details</div>
-      </div>
+      </a>
     ) : (
-      <div class={`project-card project-card-backend ${i >= 4 ? 'extra' : ''}`} data-index={i}>
+      <a href={`/projects/${p.slug}`} class={`project-card project-card-backend ${i >= 4 ? 'extra' : ''}`} data-index={i}>
         <div class="backend-card-header">
           <div class="backend-badge">
             <span class="backend-dot"></span>
@@ -67,7 +67,7 @@ function initials(name) {
             <span class="backend-arrow">→</span>
           </div>
         </div>
-      </div>
+      </a>
     )
   ))}
 </div>
@@ -230,13 +230,6 @@ function initials(name) {
   });
 
   // ---------- Card clicks -> tell the Modals island what to show ----------
-  document.querySelectorAll('#projectGrid .project-card').forEach((card) => {
-    card.addEventListener('click', () => {
-      const i = Number(card.getAttribute('data-index'));
-      window.dispatchEvent(new CustomEvent('open-project-modal', { detail: projects[i] }));
-    });
-  });
-
   document.querySelectorAll('#certList .cert-card').forEach((card) => {
     card.addEventListener('click', () => {
       const i = Number(card.getAttribute('data-index'));
