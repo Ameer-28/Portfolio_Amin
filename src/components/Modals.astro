@@ -30,7 +30,11 @@
   const certModalBody = document.getElementById('certModalBody');
 
   function initials(name) {
-    return name.split(' ').map((w) => w[0]).slice(0, 2).join('');
+    const parts = name.trim().split(/[\s-]+/);
+    if (parts.length >= 2) {
+      return (parts[0][0] + parts[1][0]).toUpperCase();
+    }
+    return name.slice(0, 2).toUpperCase();
   }
 
   window.addEventListener('open-project-modal', (e) => {

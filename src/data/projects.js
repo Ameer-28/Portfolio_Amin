@@ -1,5 +1,21 @@
 export const projects = [
   {
+    slug: "takarlaba",
+    name: "TakarLaba",
+    tier: "Flagship",
+    hasUi: true,
+    img: "/images/projects/takarlaba.png",
+    desc: "Sistem SaaS multi-tenant penjaga margin dan mitigasi waste untuk UMKM kuliner (GTNIC 2026). Dilengkapi kalkulasi Dual HPP real-time, simulasi Price Shock Impact, alokasi stok berbasis FEFO dengan atomic row-locking, kasir POS dengan proteksi idempotensi, serta matriks analisis Menu Engineering.",
+    tags: ["React 19", "TypeScript", "Node.js", "Express", "PostgreSQL", "Neon", "Tailwind CSS", "TanStack Query", "Better Auth", "Zod", "REST API", "Vercel"],
+    github: "https://github.com/Ameer-28/TakarLaba",
+    live: "https://takar-laba.vercel.app",
+    caseStudy: {
+      layers: "Frontend React 19 (TanStack Query v5, Tailwind CSS v4, Lucide) berkomunikasi dengan Backend REST API Express serverless (Neon PostgreSQL 17, Better Auth cookie first-party, DTO sanitization Rule 7).",
+      entities: "15 entitas relasional: Business (Multi-tenant), User & Session, Ingredient & Batch (FEFO), Recipe & Menu, Transaction & StockMovement, PriceShockAlert.",
+      decision: "Atomic row-locking (SELECT ... FOR UPDATE) saat checkout kasir untuk mencegah race condition stok, Idempotency-Key untuk mencegah transaksi duplikat, dan Cashier Privacy Shield agar margin finansial tidak bocor ke kasir."
+    }
+  },
+  {
     slug: "smart-space-booking-api",
     name: "Smart Space Booking API",
     tier: "Flagship",

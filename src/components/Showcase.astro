@@ -3,7 +3,11 @@ import { projects } from '../data/projects.js';
 import { certs } from '../data/certs.js';
 
 function initials(name) {
-  return name.split(' ').map((w) => w[0]).slice(0, 2).join('');
+  const parts = name.trim().split(/[\s-]+/);
+  if (parts.length >= 2) {
+    return (parts[0][0] + parts[1][0]).toUpperCase();
+  }
+  return name.slice(0, 2).toUpperCase();
 }
 ---
 <section class="showcase" id="projects">
@@ -16,7 +20,7 @@ function initials(name) {
         <div class="tab-indicator" id="tabIndicator"></div>
         <button class="tab-btn active" data-tab="proyek">Proyek <span class="count">{projects.length}</span></button>
         <button class="tab-btn" data-tab="sertifikasi">Sertifikasi <span class="count">{certs.length}</span></button>
-        <button class="tab-btn" data-tab="stack">Tech Stack <span class="count">13</span></button>
+        <button class="tab-btn" data-tab="stack">Tech Stack <span class="count">17</span></button>
       </div>
     </div>
 
@@ -106,6 +110,21 @@ function initials(name) {
     <div class="stack-card" title="TypeScript">
       <span class="stack-icon"><img src="https://cdn.simpleicons.org/typescript" alt="TypeScript" /></span>
       <span class="stack-label">TypeScript</span>
+    </div>
+
+    <div class="stack-card" title="Next.js">
+      <span class="stack-icon"><img src="https://cdn.simpleicons.org/nextdotjs/ffffff" alt="Next.js" /></span>
+      <span class="stack-label">Next.js</span>
+    </div>
+
+    <div class="stack-card" title="React">
+      <span class="stack-icon"><img src="https://cdn.simpleicons.org/react" alt="React" /></span>
+      <span class="stack-label">React</span>
+    </div>
+
+    <div class="stack-card" title="Tailwind CSS">
+      <span class="stack-icon"><img src="https://cdn.simpleicons.org/tailwindcss" alt="Tailwind CSS" /></span>
+      <span class="stack-label">Tailwind CSS</span>
     </div>
 
     <div class="stack-card" title="Node.js">
