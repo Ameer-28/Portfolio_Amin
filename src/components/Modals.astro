@@ -41,7 +41,8 @@
       projModalMedia.className = "modal-media";
       projModalMedia.innerHTML = `
         <button class="modal-close" data-close>&times;</button>
-        <img src="${p.img}" alt="${p.name}">
+        <img src="${p.img}" alt="${p.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="thumb-fallback" style="display:none;">${initials(p.name)}</div>
       `;
     } else {
       projModalMedia.className = "modal-media modal-media-backend";
@@ -75,9 +76,11 @@
       <p class="modal-desc">${p.desc}</p>
       <div class="modal-tags">${p.tags.map((t) => `<span>${t}</span>`).join('')}</div>
       ${caseHtml}
-      <a class="modal-link" href="${p.github}" target="_blank" rel="noopener">${ghIcon} ${p.githubFrontend ? 'Backend' : 'Lihat di GitHub'}</a>
-      ${p.githubFrontend ? `<a class="modal-link" style="margin-left:10px;" href="${p.githubFrontend}" target="_blank" rel="noopener">${ghIcon} Frontend</a>` : ''}
-      ${p.live ? `<a class="modal-link" style="margin-left:10px; background:transparent; border:1px solid var(--line); color:var(--text);" href="${p.live}" target="_blank" rel="noopener">Live Demo →</a>` : ''}
+      <div class="modal-actions" style="margin-top:24px; display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+        <a class="modal-link" style="margin-top:0;" href="${p.github}" target="_blank" rel="noopener">${ghIcon} ${p.githubFrontend ? 'Backend' : 'Lihat di GitHub'}</a>
+        ${p.githubFrontend ? `<a class="modal-link" style="margin-top:0;" href="${p.githubFrontend}" target="_blank" rel="noopener">${ghIcon} Frontend</a>` : ''}
+        ${p.live ? `<a class="modal-link" style="margin-top:0; background:transparent; border:1px solid var(--line); color:var(--text);" href="${p.live}" target="_blank" rel="noopener">Live Demo →</a>` : ''}
+      </div>
     `;
 
     projectModal.classList.add('show');

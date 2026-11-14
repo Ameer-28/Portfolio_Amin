@@ -31,17 +31,20 @@ export const projects = [
     }
   },
   {
-    slug: "ecommerce-rest-api",
-    name: "E-Commerce REST API",
-    tier: "Backend",
-    hasUi: false,
-    desc: "REST API fondasi server-side e-commerce dengan NestJS — autentikasi JWT RBAC (Admin vs Customer), sanitasi input DTO class-validator, proteksi HTTP headers & rate limiting, siap deployment.",
-    tags: ["Node.js", "NestJS", "TypeScript", "Prisma ORM", "PostgreSQL", "REST API"],
+    slug: "sparkup-ecommerce",
+    name: "SparkUp E-Commerce",
+    tier: "Full-Stack",
+    hasUi: true,
+    img: "/images/projects/sparkup-ecommerce.png",
+    desc: "Platform toko online modern end-to-end dengan arsitektur decoupled. Mengintegrasikan frontend Next.js (Tailwind CSS, Framer Motion) yang responsif dan interaktif dengan REST API backend NestJS yang tangguh (autentikasi JWT RBAC, Prisma ORM, sanitasi DTO class-validator, dan proteksi produksi).",
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "NestJS", "Prisma ORM", "PostgreSQL", "REST API", "Vercel"],
     github: "https://github.com/Ameer-28/ecommerce-backend",
+    githubFrontend: "https://github.com/Ameer-28/sparkup-ecommerce",
+    live: "https://sparkup-ecommerce.vercel.app",
     caseStudy: {
-      layers: "Siklus pesanan e-commerce end-to-end.",
-      entities: "Relasi katalog–kategori–order.",
-      decision: "DTO class-validator & JWT RBAC untuk peran Admin vs Customer."
+      layers: "Frontend Next.js (App Router, katalog produk, keranjang belanja, dark/light theme, panel admin) terintegrasi via secure reverse proxy ke REST API modular NestJS di backend.",
+      entities: "User & Role (Customer/Admin), Product & Category, Cart, Order & OrderItem.",
+      decision: "Pemisahan arsitektur decoupled untuk fleksibilitas deploy independen (Vercel untuk frontend, server container untuk API backend) dengan keamanan RBAC menyeluruh."
     }
   },
   {
