@@ -1,3 +1,29 @@
+/* Static pre-merged League Spartan webfonts to eliminate variable font contour overlapping bugs in -webkit-text-stroke */
+@font-face{
+  font-family:'League Spartan';
+  font-weight:700;
+  font-style:normal;
+  font-display:swap;
+  src:url('/fonts/LeagueSpartan-Bold.woff2') format('woff2'),
+      url('/fonts/LeagueSpartan-Bold.ttf') format('truetype');
+}
+@font-face{
+  font-family:'League Spartan';
+  font-weight:800;
+  font-style:normal;
+  font-display:swap;
+  src:url('/fonts/LeagueSpartan-ExtraBold.woff2') format('woff2'),
+      url('/fonts/LeagueSpartan-ExtraBold.ttf') format('truetype');
+}
+@font-face{
+  font-family:'League Spartan';
+  font-weight:900;
+  font-style:normal;
+  font-display:swap;
+  src:url('/fonts/LeagueSpartan-Black.woff2') format('woff2'),
+      url('/fonts/LeagueSpartan-Black.ttf') format('truetype');
+}
+
 :root{
   --ink:#000000;
   --ink-2:#111111;
@@ -169,6 +195,7 @@ a{color:inherit; text-decoration:none;}
   display:inline-block;
   white-space:nowrap;
   user-select:none;
+  overflow:visible;
 }
 
 /* Software on the left: centered in the middle of the shoulder */
@@ -200,6 +227,8 @@ a{color:inherit; text-decoration:none;}
   z-index:3;
   color:transparent;
   -webkit-text-stroke:1.2px #ffffff;
+  font-synthesis:none;
+  paint-order:stroke fill;
 }
 
 /* ---------- Hero Reveal Entrance Animations ---------- */
@@ -342,6 +371,8 @@ a{color:inherit; text-decoration:none;}
   }
   .text-front{
     -webkit-text-stroke:1px #ffffff;
+    font-synthesis:none;
+    paint-order:stroke fill;
   }
   .word-software{
     right:calc(50% - 5.5vw);
