@@ -43,7 +43,7 @@ function initials(name) {
         <div class="backend-card-header">
           <div class="backend-badge">
             <span class="backend-dot"></span>
-            <span class="backend-type">{p.tier === 'Architecture' ? 'ARCH / BOILERPLATE' : 'REST API BACKEND'}</span>
+            <span class="backend-type">{p.slug.includes('boilerplate') ? 'ARCH / BOILERPLATE' : 'REST API BACKEND'}</span>
           </div>
           <span class="project-tier">{p.tier}</span>
         </div>

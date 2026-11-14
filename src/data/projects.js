@@ -2,7 +2,7 @@ export const projects = [
   {
     slug: "takarlaba",
     name: "TakarLaba",
-    tier: "Flagship",
+    tier: "Full-Stack",
     hasUi: true,
     img: "/images/projects/takarlaba.png",
     desc: "Sistem SaaS multi-tenant penjaga margin dan mitigasi waste untuk UMKM kuliner (GTNIC 2026). Dilengkapi kalkulasi Dual HPP real-time, simulasi Price Shock Impact, alokasi stok berbasis FEFO dengan atomic row-locking, kasir POS dengan proteksi idempotensi, serta matriks analisis Menu Engineering.",
@@ -18,7 +18,7 @@ export const projects = [
   {
     slug: "smart-space-booking-api",
     name: "Smart Space Booking API",
-    tier: "Flagship",
+    tier: "Backend",
     hasUi: false,
     desc: "Layanan REST API backend reservasi coworking space multi-tenant dengan isolasi data App Maker, kalkulasi diskon dinamis, validasi jadwal bebas bentrok, dan 50 endpoint terstandar.",
     tags: ["NestJS", "TypeScript", "Prisma ORM", "PostgreSQL", "Passport JWT", "Swagger", "REST API"],
@@ -75,7 +75,7 @@ export const projects = [
   {
     slug: "nestjs-prisma-architecture-boilerplate",
     name: "NestJS & Prisma Architecture Boilerplate",
-    tier: "Architecture",
+    tier: "Backend",
     hasUi: false,
     desc: "Starter boilerplate backend REST API modular dengan NestJS & Prisma ORM, autentikasi JWT, password hashing bcrypt, validasi input otomatis lewat class-validator, Swagger UI, serta Jest & Supertest.",
     tags: ["NestJS", "Prisma ORM", "TypeScript", "Architecture", "MySQL", "Swagger"],
