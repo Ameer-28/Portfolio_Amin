@@ -1,6 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Nav from '../../components/Nav.astro';
 import { projects } from '../../data/projects.js';
 
 export function getStaticPaths() {
@@ -43,8 +42,6 @@ function getTechIcon(tag) {
 ---
 
 <Layout title={`${project.name} — Muhammad Amin Murtadho`} description={project.desc}>
-  <Nav />
-
   <main class="project-detail-page">
     <div class="project-detail-container">
       
@@ -101,28 +98,6 @@ function getTechIcon(tag) {
               })}
             </div>
           </div>
-
-          <!-- CASE STUDY / ARCHITECTURE SECTION (if present) -->
-          {project.caseStudy && (
-            <div class="detail-case-study">
-              <div class="case-study-eyebrow">// Technical Architecture & Case Study</div>
-              
-              <div class="case-study-card">
-                <div class="case-card-title">Alur Arsitektur</div>
-                <p class="case-card-body">{project.caseStudy.layers}</p>
-              </div>
-
-              <div class="case-study-card">
-                <div class="case-card-title">Entitas Basis Data / Fokus</div>
-                <p class="case-card-body">{project.caseStudy.entities}</p>
-              </div>
-
-              <div class="case-study-card">
-                <div class="case-card-title">Keputusan Teknis</div>
-                <p class="case-card-body">{project.caseStudy.decision}</p>
-              </div>
-            </div>
-          )}
 
           <!-- ACTION BUTTONS -->
           <div class="detail-action-buttons">
@@ -261,7 +236,7 @@ function getTechIcon(tag) {
   .project-detail-page {
     background-color: #000000;
     min-height: 100vh;
-    padding: 130px 6vw 100px;
+    padding: 48px 6vw 90px;
     color: var(--text);
   }
 
@@ -386,7 +361,7 @@ function getTechIcon(tag) {
 
   /* Technologies Used Section */
   .detail-tech-section {
-    margin-bottom: 36px;
+    margin-bottom: 38px;
     padding-top: 10px;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
@@ -449,54 +424,13 @@ function getTechIcon(tag) {
     font-weight: bold;
   }
 
-  /* Case Study */
-  .detail-case-study {
-    margin-bottom: 38px;
-    padding: 22px 24px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.07);
-  }
-
-  .case-study-eyebrow {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 1px;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-bottom: 18px;
-  }
-
-  .case-study-card {
-    margin-bottom: 16px;
-  }
-
-  .case-study-card:last-child {
-    margin-bottom: 0;
-  }
-
-  .case-card-title {
-    font-family: var(--mono);
-    font-size: 12px;
-    font-weight: 600;
-    color: #ffffff;
-    margin-bottom: 4px;
-  }
-
-  .case-card-body {
-    font-family: var(--sans);
-    font-size: 13.5px;
-    line-height: 1.65;
-    color: var(--muted);
-  }
-
   /* Action Buttons */
   .detail-action-buttons {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
     align-items: center;
-    margin-top: 8px;
+    margin-top: 4px;
   }
 
   .detail-btn {
@@ -551,7 +485,7 @@ function getTechIcon(tag) {
   /* RIGHT COLUMN: Browser Mockup */
   .detail-media-column {
     position: sticky;
-    top: 100px;
+    top: 48px;
   }
 
   .mockup-browser-window {
@@ -762,7 +696,7 @@ function getTechIcon(tag) {
 
   @media (max-width: 640px) {
     .project-detail-page {
-      padding: 100px 5vw 80px;
+      padding: 32px 5vw 70px;
     }
 
     .detail-project-title {
