@@ -91,14 +91,15 @@ a{color:inherit; text-decoration:none;}
 }
 
 @media (max-width:640px){
-  .navwrap{ padding:24px 24px 16px; }
-  .nav .links{ gap:18px; }
+  .navwrap{ padding:26px 22px 16px; }
+  .nav .links{ gap:16px; }
   .nav .links a{ font-size:13px; }
 }
 @media (max-width:440px){
-  .nav .brand{ font-size:15px; }
-  .nav .links{ gap:14px; }
-  .nav .links a{ font-size:12px; }
+  .navwrap{ padding:26px 18px 16px; }
+  .nav .brand{ font-size:14.5px; }
+  .nav .links{ gap:11px; }
+  .nav .links a{ font-size:11.5px; }
 }
 
 /* ---------- Hero Section (Cinematic Subject + Layered Overlap Title) ---------- */
@@ -244,12 +245,12 @@ a{color:inherit; text-decoration:none;}
 @keyframes heroSoftwareRevealMobile{
   0%{
     opacity:0;
-    transform:translateX(-50%) translateY(32px);
-    filter:blur(10px);
+    transform:translateY(calc(-50% + 28px));
+    filter:blur(8px);
   }
   100%{
     opacity:1;
-    transform:translateX(-50%) translateY(0);
+    transform:translateY(-50%);
     filter:blur(0);
   }
 }
@@ -257,12 +258,12 @@ a{color:inherit; text-decoration:none;}
 @keyframes heroEngineerRevealMobile{
   0%{
     opacity:0;
-    transform:translateX(-50%) translateY(32px);
-    filter:blur(10px);
+    transform:translateY(calc(-50% + 28px));
+    filter:blur(8px);
   }
   100%{
     opacity:1;
-    transform:translateX(-50%) translateY(0);
+    transform:translateY(-50%);
     filter:blur(0);
   }
 }
@@ -282,34 +283,85 @@ a{color:inherit; text-decoration:none;}
   will-change:transform, opacity, filter;
 }
 
-/* Responsive adjustment for tablets & mobile */
-@media (max-width:860px){
+/* Responsive adjustment for tablets */
+@media (max-width:860px) and (min-width:641px){
   .hero-text-layer{
-    font-size:clamp(3rem, 13vw, 5rem);
+    font-size:clamp(3rem, 10vw, 4.8rem);
   }
   .word-software{
-    right:auto;
-    left:50%;
-    transform:translateX(-50%);
-    top:25%;
-    text-align:center;
+    right:calc(50% + 1.5vw);
+    top:45%;
+    transform:translateY(-50%);
+    text-align:right;
   }
   .word-engineer{
+    left:calc(50% + 3vw);
+    top:58%;
+    transform:translateY(-50%);
+    text-align:left;
+  }
+  .hero-portrait-wrap{
+    height:70vh;
+    max-height:600px;
+    bottom:0;
+  }
+}
+
+/* Mobile: 3-layer overlap identical to reference design */
+@media (max-width:640px){
+  .hero-showcase{
+    height:100vh;
+    height:100dvh;
+    min-height:600px;
+  }
+  .hero-portrait-wrap{
+    position:absolute;
     left:50%;
     transform:translateX(-50%);
-    top:62%;
-    text-align:center;
+    top:22.5%;
+    bottom:auto;
+    height:41vh;
+    max-height:400px;
+    min-height:290px;
+    width:92vw;
+    max-width:390px;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+  }
+  .hero-portrait-img{
+    height:100%;
+    width:auto;
+    max-width:100%;
+    object-fit:contain;
+    object-position:top center;
+  }
+  .hero-text-layer{
+    font-size:clamp(2.3rem, 10.4vw, 3.4rem);
+    letter-spacing:-0.03em;
+  }
+  .text-front{
+    -webkit-text-stroke:1px #ffffff;
+  }
+  .word-software{
+    right:calc(50% - 5.5vw);
+    left:auto;
+    top:37.2%;
+    transform:translateY(-50%);
+    text-align:right;
+  }
+  .word-engineer{
+    left:calc(50% - 1vw);
+    right:auto;
+    top:46.5%;
+    transform:translateY(-50%);
+    text-align:left;
   }
   .hero-showcase.hero-animate .word-software{
     animation-name:heroSoftwareRevealMobile;
   }
   .hero-showcase.hero-animate .word-engineer{
     animation-name:heroEngineerRevealMobile;
-  }
-  .hero-portrait-wrap{
-    height:62vh;
-    max-height:500px;
-    bottom:2vh;
   }
 }
 
