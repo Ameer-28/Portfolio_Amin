@@ -37,11 +37,26 @@
     const p = e.detail;
     if (!projModalMedia || !projModalBody || !projectModal) return;
 
-    projModalMedia.innerHTML = `
-      <button class="modal-close" data-close>&times;</button>
-      <img src="${p.img}" alt="${p.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-      <div class="thumb-fallback" style="display:none;">${initials(p.name)}</div>
-    `;
+    if (p.hasUi && p.img) {
+      projModalMedia.className = "modal-media";
+      projModalMedia.innerHTML = `
+        <button class="modal-close" data-close>&times;</button>
+        <img src="${p.img}" alt="${p.name}">
+      `;
+    } else {
+      projModalMedia.className = "modal-media modal-media-backend";
+      projModalMedia.innerHTML = `
+        <div class="terminal-bar">
+          <div class="terminal-dots">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+            <span class="terminal-file">${p.slug}.service.ts // Backend API</span>
+          </div>
+          <button class="modal-close modal-close-backend" data-close>&times;</button>
+        </div>
+      `;
+    }
 
     let caseHtml = '';
     if (p.caseStudy) {

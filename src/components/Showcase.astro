@@ -26,13 +26,45 @@ function initials(name) {
       <div class="tab-panel active" data-panel="proyek">
         <div class="project-grid" id="projectGrid">
   {projects.map((p, i) => (
-    <div class={`project-card ${i >= 4 ? 'extra' : ''}`} data-index={i}>
-      <img class="thumb" src={p.img} alt={p.name} onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-      <div class="thumb-fallback" style="display:none;">{initials(p.name)}</div>
-      <span class="project-tier">{p.tier}</span>
-      <div class="pname">{p.name}</div>
-      <div class="peye">🔍︎ View details</div>
-    </div>
+    p.hasUi ? (
+      <div class={`project-card project-card-ui ${i >= 4 ? 'extra' : ''}`} data-index={i}>
+        <img class="thumb" src={p.img} alt={p.name} onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+        <div class="thumb-fallback" style="display:none;">{initials(p.name)}</div>
+        <span class="project-tier">{p.tier}</span>
+        <div class="pname">{p.name}</div>
+        <div class="peye">🔍︎ View details</div>
+      </div>
+    ) : (
+      <div class={`project-card project-card-backend ${i >= 4 ? 'extra' : ''}`} data-index={i}>
+        <div class="backend-card-header">
+          <div class="backend-badge">
+            <span class="backend-dot"></span>
+            <span class="backend-type">{p.tier === 'Architecture' ? 'ARCH / BOILERPLATE' : 'REST API BACKEND'}</span>
+          </div>
+          <span class="project-tier">{p.tier}</span>
+        </div>
+
+        <div class="backend-card-body">
+          <h3 class="backend-title">{p.name}</h3>
+          <p class="backend-desc">{p.desc}</p>
+        </div>
+
+        <div class="backend-card-footer">
+          <div class="backend-tags">
+            {p.tags.slice(0, 4).map((t) => (
+              <span class="backend-tag">{t}</span>
+            ))}
+            {p.tags.length > 4 && (
+              <span class="backend-tag more">+{p.tags.length - 4}</span>
+            )}
+          </div>
+          <div class="backend-action">
+            <span class="backend-meta">Detail arsitektur</span>
+            <span class="backend-arrow">→</span>
+          </div>
+        </div>
+      </div>
+    )
   ))}
 </div>
 
