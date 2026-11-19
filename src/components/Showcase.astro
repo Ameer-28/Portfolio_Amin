@@ -73,9 +73,14 @@ function initials(name) {
 </div>
 
 {projects.length > 4 && (
-  <button class="project-more" id="projectMoreBtn">
-    View More ({projects.length - 4})
-  </button>
+  <div class="project-more-wrap">
+    <button class="project-more" id="projectMoreBtn" aria-expanded="false">
+      <span class="more-label">View More ({projects.length - 4})</span>
+      <svg class="more-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </button>
+  </div>
 )}
       </div>
 
@@ -238,13 +243,30 @@ function initials(name) {
   });
 
   const moreBtn = document.getElementById('projectMoreBtn');
-const grid = document.getElementById('projectGrid');
+  const grid = document.getElementById('projectGrid');
 
-if (moreBtn && grid) {
-  const hiddenCount = grid.querySelectorAll('.project-card.extra').length;
-  moreBtn.addEventListener('click', () => {
-    const expanded = grid.classList.toggle('show-all');
-    moreBtn.textContent = expanded ? 'View Less' : `View More (${hiddenCount})`;
-  });
-}
+  if (moreBtn && grid) {
+    const hiddenCount = grid.querySelectorAll('.project-card.extra').length;
+    const label = moreBtn.querySelector('.more-label');
+    const chevron = moreBtn.querySelector('.more-chevron');
+
+    moreBtn.addEventListener('click', () => {
+      const expanded = grid.classList.toggle('show-all');
+      moreBtn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      if (label) {
+        label.textContent = expanded ? 'View Less' : `View More (${hiddenCount})`;
+      } else {
+        moreBtn.textContent = expanded ? 'View Less' : `View More (${hiddenCount})`;
+      }
+      if (chevron instanceof HTMLElement || chevron instanceof SVGElement) {
+        chevron.style.transform = expanded ? 'rotate(180deg)' : 'rotate(0deg)';
+      }
+      if (!expanded) {
+        const projectsEl = document.getElementById('projects');
+        if (projectsEl) {
+          projectsEl.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
+  }
 </script>

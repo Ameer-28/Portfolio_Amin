@@ -31,20 +31,6 @@ export const projects = [
     }
   },
   {
-    slug: "smart-space-booking-api",
-    name: "Smart Space Booking API",
-    tier: "Backend",
-    hasUi: false,
-    desc: "Layanan REST API backend reservasi coworking space multi-tenant dengan isolasi data App Maker, kalkulasi diskon dinamis, validasi jadwal bebas bentrok, dan 50 endpoint terstandar.",
-    tags: ["NestJS", "TypeScript", "Prisma ORM", "PostgreSQL", "Passport JWT", "Swagger", "REST API"],
-    github: "https://github.com/Ameer-28/Smart_Space_Booking",
-    caseStudy: {
-      layers: "Client Guard (x-maker-key) → Authentication & Role Security (Dual-secret JWT) → Domain Business Logic (Collision-Free Scheduler & Dynamic Discount) → Data Persistence (Prisma ORM & PostgreSQL).",
-      entities: "AppMaker & User, Space & Diskon, Reservasi & DetailReservasi.",
-      decision: "Dual-Secret JWT Isolation & Decoupled Historical Pricing Snapshot."
-    }
-  },
-  {
     slug: "lapangin",
     name: "Lapang.in",
     tier: "Full-Stack",
@@ -76,6 +62,20 @@ export const projects = [
       layers: "Frontend Next.js (App Router, katalog produk, keranjang belanja, dark/light theme, panel admin) terintegrasi via secure reverse proxy ke REST API modular NestJS di backend.",
       entities: "User & Role (Customer/Admin), Product & Category, Cart, Order & OrderItem.",
       decision: "Pemisahan arsitektur decoupled untuk fleksibilitas deploy independen (Vercel untuk frontend, server container untuk API backend) dengan keamanan RBAC menyeluruh."
+    }
+  },
+  {
+    slug: "smart-space-booking-api",
+    name: "Smart Space Booking API",
+    tier: "Backend",
+    hasUi: false,
+    desc: "Layanan REST API backend reservasi coworking space multi-tenant dengan isolasi data App Maker, kalkulasi diskon dinamis, validasi jadwal bebas bentrok, dan 50 endpoint terstandar.",
+    tags: ["NestJS", "TypeScript", "Prisma ORM", "PostgreSQL", "Passport JWT", "Swagger", "REST API"],
+    github: "https://github.com/Ameer-28/Smart_Space_Booking",
+    caseStudy: {
+      layers: "Client Guard (x-maker-key) → Authentication & Role Security (Dual-secret JWT) → Domain Business Logic (Collision-Free Scheduler & Dynamic Discount) → Data Persistence (Prisma ORM & PostgreSQL).",
+      entities: "AppMaker & User, Space & Diskon, Reservasi & DetailReservasi.",
+      decision: "Dual-Secret JWT Isolation & Decoupled Historical Pricing Snapshot."
     }
   },
   {
