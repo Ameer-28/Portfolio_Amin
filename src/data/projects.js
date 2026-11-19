@@ -1,5 +1,20 @@
 export const projects = [
   {
+    slug: "signage",
+    name: "Signage NestJS",
+    tier: "Full-Stack",
+    hasUi: true,
+    img: "/images/projects/signage.jpg",
+    desc: "Sistem digital signage dan pemanggil antrian real-time modern berbasis NestJS dan WebSocket (Socket.io) sebagai solusi pengganti SevenSign desktop. Dilengkapi Web Player kiosk 1080p dengan rotasi media iklan & running text ticker, Web CMS visual untuk kustomisasi tata letak blok & live publishing tanpa reload layar, serta antarmuka Web Caller untuk pemanggilan loket antrian lab/klinik (Pramita Lab).",
+    tags: ["NestJS", "TypeScript", "WebSocket", "Socket.io", "Express", "REST API", "HTML5", "CSS3", "JavaScript", "Railway"],
+    github: "https://github.com/Ameer-28/Signage",
+    caseStudy: {
+      layers: "Arsitektur decoupled real-time: Server NestJS (Express + WebSocket Gateway Socket.io, Multer file storage, parser XML SevenSign) bertindak sebagai single source of truth yang menyiarkan status antrian dan payload publish secara instan ke Web Player (Kiosk TV display), Web CMS (Layout & media manager), dan Web Caller (Petugas loket).",
+      entities: "Entitas Channel (Version, Dimension, Blocks, Playlist, Media/Video/Marquee items), Queue State (Service/Loket ID, Prefix, Ticket Number, Timestamp), Media Assets, dan API Key Guard.",
+      decision: "Migrasi format legasi XML SevenSign (PRAMITHA.XML) menjadi JSON channel yang fleksibel di browser, transmisi real-time event-driven via Socket.io agar layar TV tidak perlu me-reload halaman saat ada antrian atau konten baru, dan proteksi endpoint CMS/Caller menggunakan ApiKeyGuard berbasis HTTP header."
+    }
+  },
+  {
     slug: "takarlaba",
     name: "TakarLaba",
     tier: "Full-Stack",
